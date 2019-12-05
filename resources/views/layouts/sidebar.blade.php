@@ -11,6 +11,14 @@
                 <li><a href="{{ action('CategoryController@index') }}"><i class="fa fa-angle-double-right"></i>LIST Category</a></li> 
             </ul>
         </li> 
+        
+        <li>
+            <a href="#" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-user-plus"></i>  Products<i class="fa fa-fw fa-angle-down pull-right"></i></a>
+            <ul id="products" class="collapse">
+                <li><a href="{{ action('ProductController@create') }}"><i class="fa fa-angle-double-right"></i> ADD Product</a></li>
+                <li><a href="{{ action('ProductController@index') }}"><i class="fa fa-angle-double-right"></i>LIST Product</a></li> 
+            </ul>
+        </li> 
 
 
     </ul>

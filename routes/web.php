@@ -28,3 +28,6 @@
     ///Category
     Route::resource('categories', 'CategoryController');
     
+    /////Products
+    Route::resource('products', 'ProductController');
+    
