@@ -20,9 +20,11 @@
 
     Route::get('/home', 'HomeController@index')->name('home');
 
-//Logout
+    //Logout
     Route::get('logout', 'Auth\LoginController@logout');
-
     ///home page
     Route::get('index', 'HomeController@index');
+
+    ///Category
+    Route::resource('categories', 'CategoryController');
     
