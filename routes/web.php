@@ -27,6 +27,10 @@
 
     ///Category
     Route::resource('categories', 'CategoryController');
+
+    ///Subcategories
+    Route::resource('subcategories', 'SubCategoryController');
+    
     
     /////Products
     Route::resource('products', 'ProductController');

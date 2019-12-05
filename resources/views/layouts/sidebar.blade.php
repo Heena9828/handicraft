@@ -20,6 +20,14 @@
             </ul>
         </li> 
 
+        <li>
+            <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-fw fa-user-plus"></i> Sub Category<i class="fa fa-fw fa-angle-down pull-right"></i></a>
+            <ul id="submenu-2" class="collapse">
+                <li><a href="{{ action('SubCategoryController@create') }}"><i class="fa fa-angle-double-right"></i> ADD Sub Category</a></li>
+                <li><a href="{{ action('SubCategoryController@index') }}"><i class="fa fa-angle-double-right"></i>LIST Sub Category</a></li> 
+            </ul>
+        </li> 
+
 
     </ul>
 
