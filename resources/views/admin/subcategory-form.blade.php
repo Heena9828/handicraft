@@ -21,7 +21,7 @@
 
                                     <option value="">--- Select Category ---</option>
                                     @foreach ($arr_category as $value)
-                                    <option value="{{ $value['id'] }}" {{ ( isset($subCategory) && $subCategory['category_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['category_name'] }}</option>
+                                    <option value="{{ $value['id'] }}" {{ ( isset($subcategory) && $subcategory['category_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['category_name'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
