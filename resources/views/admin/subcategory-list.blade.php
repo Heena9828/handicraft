@@ -34,7 +34,7 @@
                 <tr>
                     <th>No.</th>
                     <th>Sub Category</th>  
-                    <th> Category</th> 
+                    <th>Category</th> 
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -42,7 +42,7 @@
                 <tr>
                     <td>{{ ++$i }}</td>
                     <td>{{ $subcategory->sub_category_name}}</td> 
-                    <td>{{ $subcategory->categories->category_name }} </td>
+                    <td>{{ $subcategory->categories['category_name'] }} </td>
                     <td> 
                         <a class="btn btn-primary" href="{{ route('subcategories.edit',$subcategory->id) }}">Edit</a>
                     </td> 
