@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    </head>
+  
     <body>
         <div class="" style="text-align: center">
 
@@ -20,7 +13,7 @@
                         {!! Form::text('product_name', null, array('placeholder' => 'Product Name','class' => 'form-control')) !!}
                     </div>
                 </div>
-                
+
                 <div class="form-group row" >
                     {!! Form::label('sku', 'Sku:', ['class' => 'col-lg-2 control-label']) !!}
 
@@ -28,7 +21,7 @@
                         {!! Form::text('sku', null, array('placeholder' => 'Sku','class' => 'form-control')) !!}
                     </div>
                 </div>
-                
+
                 <div class="form-group row" >
                     {!! Form::label('price', 'Price:', ['class' => 'col-lg-2 control-label']) !!}
 
@@ -36,7 +29,7 @@
                         {!! Form::text('price', null, array('placeholder' => 'Price','class' => 'form-control')) !!}
                     </div>
                 </div>
-                
+
                 <div class="form-group row" >
                     {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
 
@@ -44,7 +37,7 @@
                         {!! Form::text('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
                     </div>
                 </div>
-              
+
 
                 <div class="form-group row">
                     <div class="col-md-9 offset-sm-3">
