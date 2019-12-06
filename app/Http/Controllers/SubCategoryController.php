@@ -25,7 +25,7 @@
         public function store(Request $request)
         {
             request()->validate([
-                'sub_category_name' => 'required',
+                'sub_category_name' => 'required|unique:subcategories',
             ]);
             SubCategory::create($request->all());
             return redirect()->route('subcategories.index')
