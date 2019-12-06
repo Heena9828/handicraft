@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+        <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    </head>
     <body>
         <div class="" style="text-align: center">
 
@@ -31,10 +37,33 @@
                 </div>
 
                 <div class="form-group row" >
+                    {!! Form::label('category_id', 'Select Category:', ['class' => 'col-lg-2 control-label']) !!}
+
+                    <div class="col-md-4" class="form-group">
+                        <select name="category_id" class="form-control" id="category_id">
+                            <option value="">--- Select Category ---</option>
+                            @foreach ($arr_category as $value)
+                            <option value="{{ $value['id'] }}" {{ ( isset($products) && $products['category_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['category_name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
+
+                    <div class="col-md-4" class="form-group">
+                        <select name="subcategory_id" class="form-control" id="subcategory_id" >
+                            <option value="">--- Select Sub Category ---</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
                     {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
 
                     <div class="col-md-4" class="form-group">
-                        {!! Form::text('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
+                        {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
                     </div>
                 </div>
 
@@ -51,3 +80,31 @@
 
 </body>
 </html>
+
+
+<script>
+    $(document).ready(function () {
+        $('#category_id').change(function () {
+
+            var c_id = $(this).val();
+            alert(c_id);
+            $.ajax({
+                type: "get",
+                url: "/get_subcategory/" + c_id,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (res)
+                {
+                    if (res)
+                    {
+                        $.each(res, function (key, value) {
+                            $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
+                        });
+                    }
+                }
+            })
+        });
+    });
+
+</script>

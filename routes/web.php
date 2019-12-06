@@ -35,3 +35,6 @@
     /////Products
     Route::resource('products', 'ProductController');
     
+    Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
+
+    

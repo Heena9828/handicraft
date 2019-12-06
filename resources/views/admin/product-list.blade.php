@@ -34,6 +34,10 @@
                 <tr>
                     <th>No</th>
                     <th>Product Name</th>
+                    <th>Sku</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Sub Category</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -41,6 +45,10 @@
                 <tr>
                     <td>{{ ++$i }}</td>
                     <td>{{ $product->product_name}}</td> 
+                    <td>{{ $product->sku}}</td> 
+                    <td>{{ $product->price}}</td> 
+                    <td>{{ $product->categories->category_name}}</td> 
+                    <td>{{ $product->subcategories->sub_category_name}}</td> 
                    
 
                     <td><a class="fa fa-pencil-square-o" href="{{ route('products.edit',$product->id) }}"></a></td>
