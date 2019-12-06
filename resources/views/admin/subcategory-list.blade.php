@@ -33,16 +33,16 @@
             <table class="table table-bordered" border="1">
                 <tr>
                     <th>No.</th>
-                    <th>Category Name</th> 
-                    <th>Sub Category</th> 
+                    <th>Sub Category</th>  
+                    <th> Category</th> 
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                 @foreach ($subcategories as $subcategory)
+                @foreach ($subcategories as $subcategory)
                 <tr>
                     <td>{{ ++$i }}</td>
                     <td>{{ $subcategory->sub_category_name}}</td> 
-                     <td>{{ $subcategory->categories->category_name }} </td>
+                    <td>{{ $subcategory->categories->category_name }} </td>
                     <td> 
                         <a class="btn btn-primary" href="{{ route('subcategories.edit',$subcategory->id) }}">Edit</a>
                     </td> 
