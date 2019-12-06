@@ -11,6 +11,8 @@
         public function index()
         {
             $categories = Category::latest()->paginate(5);
+            
+//            $catId = $categories->
             return view('admin.category-list', compact('categories'))
                     ->with('i', (request()->input('page', 1) - 1) * 5);
         }
