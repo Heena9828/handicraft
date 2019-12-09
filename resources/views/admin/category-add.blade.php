@@ -28,7 +28,8 @@
     </div>
 </div>
 @endif 
-{!! Form::open(array('route' => 'categories.store','method'=>'POST')) !!}
-@include('admin.category-form')
-{!! Form::close() !!}
+<form action="{{route('categories.store')}}" method="post" id="addCategory">
+{{ csrf_field() }}
+    @include('admin.category-form')
+</form>
 @endsection
