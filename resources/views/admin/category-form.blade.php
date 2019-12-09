@@ -16,7 +16,7 @@
                 <span id="catErr" style="color: red; margin-right: 38%;"></span>
                 <br>
                 <br>
-                
+
 
                 <div class="form-group row">
                     <div class="col-md-9 offset-sm-3">
@@ -30,24 +30,12 @@
         <script>
             function validate()
             {
-
                 if ($('#category_name').val() == '') {
                     $('#catErr').text('Required');
                     return false;
                 }
-
-                // regular expression
-                if ($('#category_name').val() == '') {
-                    $('#catErr').text('Required');
-                    return false;
-                }
-
                 $('#addCategory').submit();
             }
-
-
-
-
         </script>
 
     </body>
