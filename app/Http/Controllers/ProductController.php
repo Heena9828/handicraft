@@ -5,6 +5,7 @@
     use App\Product;
     use App\Category;
     use App\SubCategory;
+    use App\ProductImage;
     use Illuminate\Http\Request;
     use DB;
 
@@ -35,7 +36,19 @@
                 'category_id' => 'required',
                 'subcategory_id' => 'required',
             ]);
-            Product::create($request->all());
+            
+            $products = Product::create($request->all());
+//            dd($request->all());
+            foreach ($request->product_images as $product_images)
+            {                
+                $filename = $product_images->store('product_images');
+
+                ProductImage::create([
+                    'product_id' => $products->id,
+                    'filename' => $filename
+                ]);
+            }
+            
             return redirect()->route('products.index')
                     ->with('success', 'Product created successfully');
         }

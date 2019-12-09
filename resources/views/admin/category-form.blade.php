@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+    <head>
+         <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    </head>
     <body>
         <div class="" style="text-align: center">
 
@@ -17,7 +19,7 @@
               
                 <div class="form-group row">
                     <div class="col-md-9 offset-sm-3">
-                        <button type="submit" name="save"  id="button" class="btn btn-primary mr-2" style="margin-right: 360px;"> <i class="fa fa-save" aria-hidden="true"></i> Save</button>
+                        <button type="button" name="save"  id="button" class="btn btn-primary mr-2" style="margin-right: 360px;"> <i class="fa fa-save" aria-hidden="true"></i> Save</button>
                     </div>
                 </div>
 
