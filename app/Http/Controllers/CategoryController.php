@@ -5,9 +5,7 @@
     use App\Category;
     use Illuminate\Http\Request;
     use Validator;
-    
-    
-//    namespace App\Http\Controllers\API;
+    use Laravel\Passport\HasApiTokens;
 
     class CategoryController extends Controller
     {
@@ -26,24 +24,15 @@
             return view('admin.category-add');
         }
 
-        public function store(Request $request)
-        {
-            $validator = Validator::make($request->all(), [
-                    'category_name' => 'required',
-            ]);
-            if ($validator->fails())
-            {
-                return response()->json(['error' => $validator->errors()], 401);
-            }
-
-            $input = $request->all();
-            $user = Category::create($input);
-//            $success['token'] = $user->createToken('MyApp')->accessToken;
-            $success['category_name'] = $user->name;
-            return response()->json(['success' => $success]);
-            return redirect()->route('categories.index')
-                    ->with('success', 'Category created successfully');
-        }
+//        public function store(Request $request)
+//        {
+//            request()->validate([
+//                'category_name' => 'required|unique:categories',
+//            ]);
+//            Category::create($request->all());
+//            return redirect()->route('categories.index')
+//                    ->with('success', 'Category created successfully');
+//        }
 
         public function edit(Category $category)
         {
@@ -70,15 +59,8 @@
 
         public function get(Request $request)
         {
-            // validation
-            // select category
-            // response categpry
+            ///Validation
 
-            return response()->json(['adasd', 'asdsad', 'sadasd']);
-        }
-
-        public function register(Request $request)
-        {
             $validator = Validator::make($request->all(), [
                     'category_name' => 'required',
             ]);
@@ -89,8 +71,24 @@
             $input = $request->all();
             $user = Category::create($input);
             $success['token'] = $user->createToken('MyApp')->accessToken;
-            $success['category_name'] = $user->name;
             return response()->json(['success' => $success], $this->successStatus);
+        }
+
+        public function store(Request $request)
+        {
+            $rules = [
+                'category_name' => 'required',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails())
+            {
+                return response()->json($validator->errors(), 400);
+            }
+ 
+            $user = Category::create($request->all());
+            
+            return redirect()->route('categories.index')
+                    ->with('success', 'Category created successfully');
         }
 
     }
