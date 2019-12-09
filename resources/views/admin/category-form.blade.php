@@ -28,24 +28,12 @@
         <script>
             function validate()
             {
-
                 if ($('#category_name').val() == '') {
                     $('#catErr').text('Required');
                     return false;
                 }
-
-                // regular expression
-                if ($('#category_name').val() == '') {
-                    $('#catErr').text('Required');
-                    return false;
-                }
-
                 $('#addCategory').submit();
             }
-
-
-
-
         </script>
 
     </body>
