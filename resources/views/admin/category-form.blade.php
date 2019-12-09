@@ -10,13 +10,11 @@
 
                     <div class="col-md-4" class="form-group">
                         {!! Form::text('category_name', null, array('placeholder' => 'Category Name','class' => 'form-control')) !!}
+                         <span id="catErr" style="color: red; margin-right: 82%;"></span>
                     </div>
-
+                   
                 </div>
-                <span id="catErr" style="color: red; margin-right: 38%;"></span>
-                <br>
-                <br>
-                
+
 
                 <div class="form-group row">
                     <div class="col-md-9 offset-sm-3">
