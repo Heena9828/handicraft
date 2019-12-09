@@ -7,6 +7,7 @@
     class Category extends Model
     {
 
+        public $table = "categories";
         protected $fillable = [
             'category_name',
         ];

@@ -10,9 +10,9 @@
 
                     <div class="col-md-4" class="form-group">
                         {!! Form::text('category_name', null, array('placeholder' => 'Category Name','class' => 'form-control')) !!}
-                         <span id="catErr" style="color: red; margin-right: 82%;"></span>
+                        <span id="catErr" style="color: red; margin-right: 53%;"></span>
                     </div>
-                   
+
                 </div>
 
 
@@ -29,7 +29,7 @@
             function validate()
             {
                 if ($('#category_name').val() == '') {
-                    $('#catErr').text('Required');
+                    $('#catErr').text('Category Name Required');
                     return false;
                 }
                 $('#addCategory').submit();

@@ -6,6 +6,7 @@
     use Illuminate\Http\Request;
     use Validator;
     use Laravel\Passport\HasApiTokens;
+    use Illuminate\Support\Facades\Redirect;
 
     class CategoryController extends Controller
     {
@@ -25,12 +26,12 @@
         public function store(Request $request)
         {
             $rules = [
-                'category_name' => 'required',
+                'category_name' => 'required|unique:categories'
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails())
             {
-                return response()->json($validator->errors(), 400);
+                return Redirect::back()->withErrors($validator);
             }
 
             Category::create($request->all());
