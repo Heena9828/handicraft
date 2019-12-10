@@ -5,7 +5,7 @@
     use App\Product;
     use App\Category;
     use App\SubCategory;
-    use App\ProductImage;
+    use App\ProductsImage;
     use Illuminate\Http\Request;
     use DB;
 
@@ -35,33 +35,23 @@
                 'description' => 'required',
                 'category_id' => 'required',
                 'subcategory_id' => 'required',
+                'filename' => 'required',
             ]);
-
-            $products = Product::create($request->all());
-//            dd($request->all());
-//            foreach ($request->product_images as $product_images)
-//            {
-//                $filename = $product_images->store('product_images');
-//
-//                ProductImage::create([
-//                    'product_id' => $products->id,
-//                    'filename' => $filename
-//                ]);
-//            }
+            
+            $product = Product::create($request->all());
+            
+            foreach ($request->file('filename') as $photo)
+            {                
+                $filename = $photo->store('photos');
+                ProductsImage::create([
+                    'product_id' => $product->id,
+                    'filename' => $filename
+                ]);
+            }
 
             return redirect()->route('products.index')
                     ->with('success', 'Product created successfully');
         }
-
-//            if ($request->images)
-//            {
-//                $images = $request->images; 
-//                $total = $request->TotalImages;
-//                $imagesName = $images->getClientOriginalName();
-//                $randonName = rand(1, 200);
-//                $images->move(public_path('/images/test'), $randonName . '.jpg');
-//                return response()->json($randonName);
-//            }
 
         public function show(Product $product)
         {

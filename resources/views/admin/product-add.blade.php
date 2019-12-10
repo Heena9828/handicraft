@@ -28,7 +28,10 @@
     </div>
 </div>
 @endif
-{!! Form::open(array('route' => 'products.store','method'=>'POST')) !!}
+
+
+<form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
+{{ csrf_field() }}    
 @include('admin.product-form')
-{!! Form::close() !!}
+</form>
 @endsection
