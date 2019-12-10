@@ -38,7 +38,7 @@
                 <div class="form-group row" >
                     {!! Form::label('category_id', 'Select Category:', ['class' => 'col-lg-2 control-label']) !!}
 
-                    <div class="col-md-4" class="form-group">
+                    <div class="col-md-4" class="form-group" >
                         <select name="category_id" class="form-control" id="category_id">
                             <option value="">--- Select Category ---</option>
                             @foreach ($arr_category as $value)
@@ -51,7 +51,7 @@
 
 
 
-                <div class="form-group row" >
+                <div class="form-group row" id="business"  style="display:none;" >
                     {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
 
                     <div class="col-md-4" class="form-group">
@@ -103,40 +103,41 @@
 
             </div>
         </div>
-    </div>
-
-
-</body>
+    </body>
 </html>
-
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        $('#category_id').change(function () {
+    $('#category_id').change(function () {
 
+    $("#business").show();
             var c_id = $(this).val();
-            $.ajax({
-                type: "get",
-                url: "/get_subcategory/" + c_id,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (res)
-                {
-                    if (res)
-                    {
-                        $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                        $.each(res, function (key, value) {
-                            $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                        });
+            var subCatId = {{$product['subcategory_id']}};
+    $.ajax({
+        type: "get",
+        url: "/get_subcategory/" + c_id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (res)
+        {
+            if (res)
+            {
+                $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                $.each(res, function (key, value) {
+                    if (key == subCatId) {
 
+                        $("#subcategory_id").append('<option value="' + key + '" selected = "selected">' + value + '</option>');
+                    }                                                            // selected
+                    $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
+                });
+            }
 
-                    }
-
-                }
-            })
-        });
-    });
+        }
+    })
+    }
+    );
+});
 
 
 
