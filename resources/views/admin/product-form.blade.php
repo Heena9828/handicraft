@@ -13,6 +13,7 @@
             <div class="container" style="margin-top: 85px; margin-left: 85px;">
                 <form method="post" action="{{url('products')}}" enctype="multipart/form-data">
                     {{csrf_field()}}
+
                     <div class="form-group row" >
                         {!! Form::label('product_name', 'Product Name:', ['class' => 'col-lg-2 control-label']) !!}
 
@@ -44,7 +45,7 @@
                             <select name="category_id" class="form-control" id="category_id">
                                 <option value="">--- Select Category ---</option>
                                 @foreach ($arr_category as $value)
-                                <option value="{{ $value['id'] }}" {{ ( isset($products) && $products['category_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['category_name'] }}</option>
+                                <option value="{{ $value['id'] }}" {{ ( isset($product) && $product['category_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['category_name'] }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -55,7 +56,7 @@
 
                         <div class="col-md-4" class="form-group">
                             <select name="subcategory_id" class="form-control" id="subcategory_id" >
-                                <option value="">--- Select Sub Category ---</option>
+                                 <option value="">--- Select Sub Category ---</option>
                             </select>
                         </div>
                     </div>
@@ -95,6 +96,7 @@
                     </div>
             </div>
         </div>
+
 
     </body>
 </html>
@@ -142,8 +144,9 @@ $('#image-upload').change(function () {
 
 <script>
     $(document).ready(function () {
-        $('#category_id').change(function () {
 
+        $('#category_id').change(function () {
+//            $("#subcategory_id").text("");
             var c_id = $(this).val();
             $.ajax({
                 type: "get",
@@ -163,5 +166,8 @@ $('#image-upload').change(function () {
             })
         });
     });
+
+
+
 
 </script>

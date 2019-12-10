@@ -62,5 +62,18 @@
                     ->with('success', 'Category deleted successfully');
         }
 
+        public function userExists()
+        {
+            $user = Category::all()->lists('category_name');
+            if (in_array(Input::get('category_name'), $user))
+            {
+                return Response::json(Input::get('category_name') . ' is already taken');
+            }
+            else
+            {
+                return Response::json(Input::get('category_name') . ' Username is available');
+            }
+        }
+
     }
     

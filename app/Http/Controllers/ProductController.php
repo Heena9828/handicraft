@@ -39,15 +39,15 @@
 
             $products = Product::create($request->all());
 //            dd($request->all());
-            foreach ($request->product_images as $product_images)
-            {
-                $filename = $product_images->store('product_images');
-
-                ProductImage::create([
-                    'product_id' => $products->id,
-                    'filename' => $filename
-                ]);
-            }
+//            foreach ($request->product_images as $product_images)
+//            {
+//                $filename = $product_images->store('product_images');
+//
+//                ProductImage::create([
+//                    'product_id' => $products->id,
+//                    'filename' => $filename
+//                ]);
+//            }
 
             return redirect()->route('products.index')
                     ->with('success', 'Product created successfully');
@@ -103,6 +103,7 @@
             $subCategory = DB::table("subcategories")
                 ->where("category_id", $c_id)
                 ->pluck("sub_category_name", "id");
+
             return response()->json($subCategory);
         }
 
