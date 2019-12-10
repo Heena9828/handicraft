@@ -106,38 +106,37 @@
     </body>
 </html>
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
 
-    $('#category_id').change(function () {
+        $('#category_id').change(function () {
 
-    $("#business").show();
+            $("#business").show();
+
             var c_id = $(this).val();
-            var subCatId = {{$product['subcategory_id']}};
-    $.ajax({
-        type: "get",
-        url: "/get_subcategory/" + c_id,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function (res)
-        {
-            if (res)
-            {
-                $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                $.each(res, function (key, value) {
-                    if (key == subCatId) {
+            var subCatId = '';
 
-                        $("#subcategory_id").append('<option value="' + key + '" selected = "selected">' + value + '</option>');
-                    }                                                            // selected
-                    $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                });
-            }
+            $.ajax({
+                type: "get",
+                url: "/get_subcategory/" + c_id,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (res)
+                {
+                    if (res)
+                    {
+                        $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                        $.each(res, function (key, value) {
 
-        }
-    })
-    }
-    );
-});
+                            $("#subcategory_id").append('<option value="' + key + '" id="subcat">' + value + '</option>');
+                            
+                        });
+                    }
+
+                }
+            })
+        });
+    });
 
 
 
