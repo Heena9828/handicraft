@@ -49,24 +49,22 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="form-group row" >
                         {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
 
                         <div class="col-md-4" class="form-group">
                             <select name="subcategory_id" class="form-control" id="subcategory_id" >
-                                 <option value="">--- Select Sub Category ---</option>
+                                <option value="">--- Select Sub Category ---</option>
+                                @foreach ($arr_subcategory as $value)
+                                <option value="{{ $value['id'] }}" {{ ( isset($product) && $product['subcategory_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['sub_category_name'] }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
-                    <!--                    <div class="form-group row" >
-                                            {!! Form::label('images', 'Product Images:', ['class' => 'col-lg-2 control-label']) !!}
-                    
-                                            <div class="col-md-4" class="form-group">
-                                                <input multiple="multiple" name="product_images[]" type="file"> 
-                                            </div>
-                                        </div>-->
+
+
 
                     <div class="form-group row" >
                         {!! Form::label('images', 'Product Images:', ['class' => 'col-lg-2 control-label']) !!}
@@ -100,72 +98,33 @@
 
     </body>
 </html>
-<!--<script>
-$.ajaxSetup({
-    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-});
-
-$('#image-upload').change(function () {
-    event.preventDefault();
-    let image_upload = new FormData();
-    let TotalImages = $('#image-upload')[0].files.length;  //Total Images
-    let images = $('#image-upload')[0];
-
-    for (let i = 0; i < TotalImages; i++) {
-        image_upload.append('images' + i, images.files[i]);
-    }
-
-    image_upload.append('TotalImages', TotalImages);
-
-    $.ajax({
-        method: 'POST',
-//        url: '/store/',
-        url: "{{route('products.store')}}", 
-        type: "POST",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: image_upload,
-        contentType: false,
-        processData: false,
-        success: function (images) {
-            console.log(`ok ${images}`)
-        },
-        error: function () {
-            console.log(`Failed`)
-        }
-    })
-
-})
-
-
-
-</script>-->
 
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        $('#category_id').change(function () {
-//            $("#subcategory_id").text("");
-            var c_id = $(this).val();
-            $.ajax({
-                type: "get",
-                url: "/get_subcategory/" + c_id,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (res)
+    $('#category_id').change(function () {
+
+        var c_id = $(this).val();
+        $.ajax({
+            type: "get",
+            url: "/get_subcategory/" + c_id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (res)
+            {
+                if (res)
                 {
-                    if (res)
-                    {
-                        $.each(res, function (key, value) {
-                            $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                        });
-                    }
+                    $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                    $.each(res, function (key, value) {
+                        $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
+                    });
                 }
-            })
-        });
+
+            }
+        })
     });
+});
 
 
 
