@@ -59,37 +59,86 @@
                             </select>
                         </div>
                     </div>
+                    <!--                    <div class="form-group row" >
+                                            {!! Form::label('images', 'Product Images:', ['class' => 'col-lg-2 control-label']) !!}
+                    
+                                            <div class="col-md-4" class="form-group">
+                                                <input multiple="multiple" name="product_images[]" type="file"> 
+                                            </div>
+                                        </div>-->
 
                     <div class="form-group row" >
                         {!! Form::label('images', 'Product Images:', ['class' => 'col-lg-2 control-label']) !!}
 
-                        <div class="col-md-4" class="form-group">
-                            <input multiple="multiple" name="product_images[]" type="file"> 
-                        </div>
+                        <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <input type="file" id="image-upload" name="image_upload[]" enctype="multipart/form-data" multiple>
+                            </div>
+
+
+
+                            <div class="form-group row" >
+                                {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
+
+                                <div class="col-md-4" class="form-group">
+                                    {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-md-9 offset-sm-3">
+                                    <button type="submit" name="save"  id="button" class="btn btn-primary mr-2" style="margin-right: 360px;"> <i class="fa fa-save" aria-hidden="true"></i> Save</button>
+                                </div>
+                            </div> 
+                        </form>
                     </div>
-
-                    <div class="form-group row" >
-                        {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
-
-                        <div class="col-md-4" class="form-group">
-                            {!! Form::textarea('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <div class="col-md-9 offset-sm-3">
-                            <button type="submit" name="save"  id="button" class="btn btn-primary mr-2" style="margin-right: 360px;"> <i class="fa fa-save" aria-hidden="true"></i> Save</button>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
 
-</body>
+    </body>
 </html>
+<!--<script>
+$.ajaxSetup({
+    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+});
 
+$('#image-upload').change(function () {
+    event.preventDefault();
+    let image_upload = new FormData();
+    let TotalImages = $('#image-upload')[0].files.length;  //Total Images
+    let images = $('#image-upload')[0];
+
+    for (let i = 0; i < TotalImages; i++) {
+        image_upload.append('images' + i, images.files[i]);
+    }
+
+    image_upload.append('TotalImages', TotalImages);
+
+    $.ajax({
+        method: 'POST',
+//        url: '/store/',
+        url: "{{route('products.store')}}", 
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: image_upload,
+        contentType: false,
+        processData: false,
+        success: function (images) {
+            console.log(`ok ${images}`)
+        },
+        error: function () {
+            console.log(`Failed`)
+        }
+    })
+
+})
+
+
+
+</script>-->
 
 <script>
     $(document).ready(function () {
