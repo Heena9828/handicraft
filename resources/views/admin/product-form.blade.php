@@ -51,7 +51,21 @@
                         </div>
                     </div> 
 
-                    <div class="form-group row" >
+
+
+
+                                         <div class="form-group row" >
+                                            {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
+                    
+                                            <div class="col-md-4" class="form-group">
+                                                <select name="subcategory_id" class="form-control" id="subcategory_id" >
+                                                     <option value="">--- Select Sub Category ---</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+<!--                    <div class="form-group row" >
                         {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
 
                         <div class="col-md-4" class="form-group">
@@ -62,7 +76,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div>-->
 
 
 
@@ -119,6 +133,8 @@ $(document).ready(function () {
                     $.each(res, function (key, value) {
                         $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
                     });
+
+
                 }
 
             }
