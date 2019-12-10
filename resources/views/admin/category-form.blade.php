@@ -26,6 +26,7 @@
         </div>
 
         <script>
+            
             function validate()
             {
                 if ($('#category_name').val() == '') {

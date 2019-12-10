@@ -47,8 +47,8 @@
                     <td>{{ $product->product_name}}</td> 
                     <td>{{ $product->sku}}</td> 
                     <td>{{ $product->price}}</td> 
-                    <td>{{ $product->categories->category_name}}</td> 
-                    <td>{{ $product->subcategories->sub_category_name}}</td> 
+                    <td>{{ $product->categories['category_name']}}</td> 
+                    <td>{{ $product->subcategories['sub_category_name']}}</td> 
                    
 
                     <td><a class="fa fa-pencil-square-o" href="{{ route('products.edit',$product->id) }}"></a></td>
