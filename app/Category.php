@@ -8,6 +8,7 @@
     {
            public $table = "categories";
 
+        public $table = "categories";
         protected $fillable = [
             'category_name',
         ];
