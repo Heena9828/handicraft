@@ -80,6 +80,15 @@
                     </div>
                 </div>
 
+                 @if(isset($product) && !empty($product) && isset($product['productimages']) )
+
+                @foreach ($product['productimages'] as $image)
+
+                <?php echo $image['filename'] . '<br>' ?>
+
+                @endforeach
+                @endif
+                
                 <div class="form-group row" >
                     {!! Form::label('image', 'Product Image:', ['class' => 'col-lg-2 control-label']) !!}
 
@@ -88,14 +97,8 @@
                     </div>
 
                 </div>
-                @if(isset($product) && !empty($product) && isset($product['productimages']) )
+               
 
-                @foreach ($product['productimages'] as $image)
-
-                <?php echo $image['filename'] . '<br>' ?>
-
-                @endforeach
-                @endif
 
                 <div class="form-group row">
                     <div class="col-md-9 offset-sm-3">
@@ -113,7 +116,7 @@
             $(document).ready(function () {
 
             let productId = {{ isset($product) ?  $product['id'] : '' }};
-//            alert(productId);
+            //            alert(productId);
 
             $('#category_id').change(function () {
             $("#business").show();
