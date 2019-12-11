@@ -48,9 +48,6 @@
                     </div>
                 </div> 
 
-
-
-
                 <!--                <div class="form-group row" id="business"  style="display:none;" >
                                     {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
                 
@@ -62,7 +59,7 @@
                                 </div>-->
 
 
-                <div class="form-group row">
+                <div class="form-group row" >
                     {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
 
                     <div class="col-md-4" class="form-group">
@@ -74,8 +71,6 @@
                         </select>
                     </div>
                 </div>
-
-
 
                 <div class="form-group row" >
                     {!! Form::label('description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
@@ -90,10 +85,17 @@
 
                     <div class="col-md-4" class="form-group">
                         <input multiple="multiple" name="filename[]" type="file"> 
-
                     </div>
-                </div>
 
+                </div>
+                @if(isset($product) && !empty($product) && isset($product['productimages']) )
+
+                @foreach ($product['productimages'] as $image)
+
+                <?php echo $image['filename'] . '<br>' ?>
+
+                @endforeach
+                @endif
 
                 <div class="form-group row">
                     <div class="col-md-9 offset-sm-3">
@@ -103,42 +105,41 @@
 
             </div>
         </div>
-    </div>
 
 
 
 
-    <script>
+        <script>
 $(document).ready(function () {
 
-    $('#category_id').change(function () {
-        $("#business").show();
+let productId = {{ isset($product) ?  $product['id'] : '' }};
+//            alert(productId);
 
+$('#category_id').change(function () {
+$("#business").show();
         var c_id = $(this).val();
         $.ajax({
-            type: "get",
-            url: "/get_subcategory/" + c_id,
-            headers: {
+        type: "get",
+                url: "/get_subcategory/" + c_id,
+                headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (res)
-            {
+                },
+                success: function (res)
+                {
                 if (res)
                 {
-                    $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                    $.each(res, function (key, value) {
+                $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                        $.each(res, function (key, value) {
                         $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                    });
-
-
+                        });
                 }
 
-            }
+                }
         })
-    });
 });
+}
+);
 
 
-//   $("#subcategory_id").append('<option value="{{ $value['id'] }}">{{ $value['sub_category_name'] }}</option>')
 
-    </script>
+        </script>

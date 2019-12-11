@@ -37,11 +37,11 @@
                 'subcategory_id' => 'required',
                 'filename' => 'required',
             ]);
-            
+
             $product = Product::create($request->all());
-            
+
             foreach ($request->file('filename') as $photo)
-            {                
+            {
                 $filename = $photo->store('photos');
                 ProductsImage::create([
                     'product_id' => $product->id,
@@ -62,6 +62,7 @@
         {
             $arr_category = Category::all();
             $arr_subcategory = SubCategory::all();
+
             return view('admin.product-edit', compact('product', 'arr_category', 'arr_subcategory'));
         }
 
