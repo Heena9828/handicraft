@@ -51,29 +51,29 @@
 
 
 
-<!--                <div class="form-group row" id="business"  style="display:none;" >
+                <!--                <div class="form-group row" id="business"  style="display:none;" >
+                                    {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
+                
+                                    <div class="col-md-4" class="form-group">
+                                        <select name="subcategory_id" class="form-control" id="subcategory_id" >
+                                            <option value="">--- Select Sub Category ---</option>
+                                        </select>
+                                    </div>
+                                </div>-->
+
+
+                <div class="form-group row">
                     {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
 
                     <div class="col-md-4" class="form-group">
                         <select name="subcategory_id" class="form-control" id="subcategory_id" >
                             <option value="">--- Select Sub Category ---</option>
+                            @foreach ($arr_subcategory as $value)
+                            <option value="{{ $value['id'] }}" {{ ( isset($product) && $product['subcategory_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['sub_category_name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
-                </div>-->
-
-
-                                    <div class="form-group row" >
-                                        {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
-                
-                                        <div class="col-md-4" class="form-group">
-                                            <select name="subcategory_id" class="form-control" id="subcategory_id" >
-                                                <option value="">--- Select Sub Category ---</option>
-                                                @foreach ($arr_subcategory as $value)
-                                                <option value="{{ $value['id'] }}" {{ ( isset($product) && $product['subcategory_id'] == $value['id']) ? 'selected="selected"' : '' }}>{{ $value['sub_category_name'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
+                </div>
 
 
 
@@ -104,39 +104,39 @@
             </div>
         </div>
     </div>
-    
+
 
 
 
     <script>
-        $(document).ready(function () {
+$(document).ready(function () {
 
-            $('#category_id').change(function () {
-                 $("#business").show();
-                 
-                var c_id = $(this).val();
-                $.ajax({
-                    type: "get",
-                    url: "/get_subcategory/" + c_id,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (res)
-                    {
-                        if (res)
-                        {
-                            $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                            $.each(res, function (key, value) {
-                                $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                            });
+    $('#category_id').change(function () {
+        $("#business").show();
+
+        var c_id = $(this).val();
+        $.ajax({
+            type: "get",
+            url: "/get_subcategory/" + c_id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (res)
+            {
+                if (res)
+                {
+                    $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                    $.each(res, function (key, value) {
+                        $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
+                    });
 
 
-                        }
+                }
 
-                    }
-                })
-            });
-        });
+            }
+        })
+    });
+});
 
 
 //   $("#subcategory_id").append('<option value="{{ $value['id'] }}">{{ $value['sub_category_name'] }}</option>')

@@ -30,12 +30,10 @@
 
     ///Subcategories
     Route::resource('subcategories', 'SubCategoryController');
-    
-    
+
+
     /////Products
     Route::resource('products', 'ProductController');
     Route::post('product', 'ProductController@store');
-    
-    Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
 
-    
+    Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
