@@ -32,7 +32,7 @@
                     {!! Form::label('price', 'Price:', ['class' => 'col-lg-2 control-label']) !!}
 
                     <div class="col-md-4" class="form-group">
-                        {!! Form::text('price', null, array('placeholder' => 'Price','class' => 'form-control',
+                        {!! Form::text('price', null, array('placeholder' => 'Price','class' => 'form-control', 
                         'oninput' => "this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')")) !!}
                     </div>
                 </div>
