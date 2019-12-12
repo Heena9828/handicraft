@@ -62,7 +62,7 @@
         {
             $arr_category = Category::all();
             $arr_subcategory = SubCategory::all();
-
+//            dd($product);
             return view('admin.product-edit', compact('product', 'arr_category', 'arr_subcategory'));
         }
 

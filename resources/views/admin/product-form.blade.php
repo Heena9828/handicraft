@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-
+        
         <meta name="csrf-token" content="{{ csrf_token() }}"> 
     </head>
     <body>
@@ -80,15 +81,16 @@
                     </div>
                 </div>
 
-                 @if(isset($product) && !empty($product) && isset($product['productimages']) )
+                @if(isset($product) && !empty($product) && isset($product['productimages']) )
 
                 @foreach ($product['productimages'] as $image)
 
-                <?php echo $image['filename'] . '<br>' ?>
-
+                <img src="{{ asset('storage/photos/'.$image->filename.'') }}" height="30px" width="30px">
+                
+                
                 @endforeach
                 @endif
-                
+
                 <div class="form-group row" >
                     {!! Form::label('image', 'Product Image:', ['class' => 'col-lg-2 control-label']) !!}
 
@@ -97,7 +99,7 @@
                     </div>
 
                 </div>
-               
+
 
 
                 <div class="form-group row">
@@ -115,31 +117,30 @@
         <script>
             $(document).ready(function () {
 
-            let productId = {{ isset($product) ?  $product['id'] : '' }};
-            //            alert(productId);
 
-            $('#category_id').change(function () {
-            $("#business").show();
+
+                $('#category_id').change(function () {
+                    $("#business").show();
                     var c_id = $(this).val();
                     $.ajax({
-                    type: "get",
-                            url: "/get_subcategory/" + c_id,
-                            headers: {
+                        type: "get",
+                        url: "/get_subcategory/" + c_id,
+                        headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function (res)
-                            {
+                        },
+                        success: function (res)
+                        {
                             if (res)
                             {
-                            $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                                    $.each(res, function (key, value) {
+                                $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                                $.each(res, function (key, value) {
                                     $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                                    });
+                                });
                             }
 
-                            }
+                        }
                     })
-            });
+                });
             }
             );
 
