@@ -86,7 +86,7 @@
 
                 @foreach ($product['productimages'] as $image) 
               
-                <img src="{{ asset('storage/photos/'.$image->filename.'') }}" height="30px" width="30px">
+                <img src="{{ asset('storage/'.$image->filename.'') }}" height="30px" width="30px">
                 
                 
                 @endforeach

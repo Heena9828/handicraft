@@ -42,7 +42,7 @@
 
             foreach ($request->file('filename') as $photo)
             {
-                $filename = $photo->store('photos');
+                $filename = $photo->store('');
                 ProductsImage::create([
                     'product_id' => $product->id,
                     'filename' => $filename
