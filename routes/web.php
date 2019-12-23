@@ -42,7 +42,7 @@
 
 //////////////////////
 ///        Route::get('about', 'AboutController@index');
-        Route::get('about', 'AboutController@index')->name('about');
+//        Route::get('about', 'AboutController@index')->name('about');
  
 
     
