@@ -15,6 +15,11 @@
     {
         return view('welcome');
     });
+    
+    Route::get('/public', function ()
+    {
+        return view('index');
+    });
 
     Auth::routes();
 
