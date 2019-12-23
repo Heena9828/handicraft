@@ -13,7 +13,7 @@
 
     Route::get('/', function ()
     {
-        return view('welcome');
+        return view('index');
     });
 
     Auth::routes();
@@ -24,6 +24,7 @@
     Route::get('logout', 'Auth\LoginController@logout');
     ///home page
     Route::get('index', 'HomeController@index');
+
 
     ///Category
     Route::resource('categories', 'CategoryController');
@@ -39,5 +40,9 @@
     Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
 
 
+//////////////////////
+///        Route::get('about', 'AboutController@index');
+        Route::get('about', 'AboutController@index')->name('about');
+ 
 
     
