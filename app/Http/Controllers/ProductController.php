@@ -80,6 +80,7 @@
             ]);
 
             $product->update($request->all());
+<<<<<<< HEAD
 //            dd($product);
 //            foreach ($request->file('filename') as $photo)
 //            {
@@ -90,6 +91,21 @@
 //                ]);
 //            }
 //            $product->update($request->all());
+=======
+            foreach ($request->file('filename') as $key => $value)
+            {
+
+                $filename = time() . $key . '.' . $value->getClientOriginalExtension();
+
+                $value->move(public_path('photos'), $filename);
+                ProductsImage::create([
+                    'product_id' => $product->id,
+                    'filename' => $filename
+                ]);
+            }
+
+
+>>>>>>> origin/master
             return redirect()->route('products.index')
                     ->with('success', 'Product updated successfully');
         }
