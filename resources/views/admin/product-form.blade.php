@@ -82,15 +82,17 @@
                     </div>
                 </div>
 
-                @if(isset($product) && !empty($product) && isset($product['productimages']) )
+                <div class="form-group row" >
+                    <div class="col-md-5" class="form-group">
+                        @if(isset($product) && !empty($product) && isset($product['productimages']) )
+                        @foreach ($product['productimages'] as $image) 
+                        <img src="{{ asset('storage/'.$image->filename.'') }}"  height="40px" width="60px">
+                        @endforeach
+                        @endif
+                    </div>
+                </div>
 
-                @foreach ($product['productimages'] as $image) 
-              
-                <img src="{{ asset('storage/'.$image->filename.'') }}" height="30px" width="30px">
-                
-                
-                @endforeach
-                @endif
+
 
                 <div class="form-group row" >
                     {!! Form::label('image', 'Product Image:', ['class' => 'col-lg-2 control-label']) !!}
@@ -113,32 +115,32 @@
 
 
         <script>
-$(document).ready(function () {
-    $('#category_id').change(function () {
-        $("#business").show();
-        var c_id = $(this).val();
-        $.ajax({
-            type: "get",
-            url: "/get_subcategory/" + c_id,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (res)
-            {
-                if (res)
-                {
-                    $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                    $.each(res, function (key, value) {
-                        $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                    });
-                }
+            $(document).ready(function () {
+                $('#category_id').change(function () {
+                    $("#business").show();
+                    var c_id = $(this).val();
+                    $.ajax({
+                        type: "get",
+                        url: "/get_subcategory/" + c_id,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (res)
+                        {
+                            if (res)
+                            {
+                                $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                                $.each(res, function (key, value) {
+                                    $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
+                                });
+                            }
+
+                        }
+                    })
+                });
 
             }
-        })
-    });
-
-}
-);
+            );
         </script>
 
         <script>

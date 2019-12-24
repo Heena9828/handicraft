@@ -42,7 +42,9 @@
 
             foreach ($request->file('filename') as $photo)
             {
-                $filename = $photo->store('');
+                
+//                $filename = $photo->store('');
+                $filename = $photo->storeAs('public/photos', $photo);
                 ProductsImage::create([
                     'product_id' => $product->id,
                     'filename' => $filename
@@ -62,7 +64,6 @@
         {
             $arr_category = Category::all();
             $arr_subcategory = SubCategory::all();
-//            dd($product);
             return view('admin.product-edit', compact('product', 'arr_category', 'arr_subcategory'));
         }
 
@@ -75,9 +76,21 @@
                 'description' => 'required',
                 'category_id' => 'required',
                 'subcategory_id' => 'required',
+                'filename' => 'required',
             ]);
-
+            
             $product->update($request->all());
+//            dd($product);
+//            foreach ($request->file('filename') as $photo)
+//            {
+//                $filename = $photo->store('');
+//                ProductsImage::update([
+//                    'product_id' => $product->id,
+//                    'filename' => $filename
+//                ]);
+//            }
+
+//            $product->update($request->all());
             return redirect()->route('products.index')
                     ->with('success', 'Product updated successfully');
         }
