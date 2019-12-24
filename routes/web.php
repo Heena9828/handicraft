@@ -13,9 +13,9 @@
 
     Route::get('/', function ()
     {
-        return view('index');
+        return view('welcome');
     });
-    
+
     Route::get('/public', function ()
     {
         return view('index');
@@ -44,10 +44,8 @@
 
     Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
 
-
-//////////////////////
-///        Route::get('about', 'AboutController@index');
-//        Route::get('about', 'AboutController@index')->name('about');
+    Route::delete('/delete/{id}', 'ProductController@delete');
+    
  
 
     

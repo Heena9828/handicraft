@@ -40,11 +40,11 @@
 
             $product = Product::create($request->all());
 
-            foreach ($request->file('filename') as $photo)
+            foreach ($request->file('filename')as $key => $value)
             {
-                
-//                $filename = $photo->store('');
-                $filename = $photo->storeAs('public/photos', $photo);
+                $filename = time() . $key . '.' . $value->getClientOriginalExtension();
+
+                $value->move(public_path('photos'), $filename);
                 ProductsImage::create([
                     'product_id' => $product->id,
                     'filename' => $filename
@@ -78,7 +78,7 @@
                 'subcategory_id' => 'required',
                 'filename' => 'required',
             ]);
-            
+
             $product->update($request->all());
 //            dd($product);
 //            foreach ($request->file('filename') as $photo)
@@ -89,7 +89,6 @@
 //                    'filename' => $filename
 //                ]);
 //            }
-
 //            $product->update($request->all());
             return redirect()->route('products.index')
                     ->with('success', 'Product updated successfully');
@@ -109,6 +108,32 @@
                 ->pluck("sub_category_name", "id");
 
             return response()->json($subCategory);
+        }
+
+//        public function deleteImage(Request $request)
+//        {
+//            $attachments = Image::find(request('filename'))->delete();
+//            dd($attachments);
+//            $path = public_path() . '/photos/' . $id . '/' . request('filename');
+//            unlink($path);
+//
+//            return response()->json($attachments);
+//
+////           
+//        }
+
+        function delete($id)
+        {
+            dd($id);
+//            $todo = ProductImages::findOrFail($id);
+//            $todo->delete();
+
+            ProductsImages::destroy($id);
+            return back();
+
+//            DB::table('products_images')->where('id', $id)->delete();
+//            return redirect()->route('products.index')
+//                    ->with('success', 'Product Image deleted successfully');
         }
 
     }
