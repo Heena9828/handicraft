@@ -42,7 +42,12 @@
 
             foreach ($request->file('filename') as $photo)
             {
-                $filename = $photo->store('');
+//                dd($photo);
+//                $photo->move(public_path('images'), $new_photo);
+//                dd($photo);
+//                 $filename->move(public_path('photos'), $photo);
+                $filename = $photo->store(public_path('photos'));
+                
                 ProductsImage::create([
                     'product_id' => $product->id,
                     'filename' => $filename
