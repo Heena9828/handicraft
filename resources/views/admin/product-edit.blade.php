@@ -28,7 +28,11 @@
     </div>
 </div>
 @endif
-{!! Form::model($product, ['method' => 'PATCH','route' => ['products.update', $product->id]]) !!}
+<form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
+<!--{!! Form::model($product, ['method' => 'PATCH','route' => ['products.update', $product->id]]) !!}-->
+<input type="hidden" name="_method" value="PATCH">
+{{ csrf_field() }}    
 @include('admin.product-form')
-{!! Form::close() !!}
+</form>
+<!--{!! Form::close() !!}-->
 @endsection

@@ -77,9 +77,23 @@
                 'description' => 'required',
                 'category_id' => 'required',
                 'subcategory_id' => 'required',
+                'filename' => 'required',
             ]);
 
             $product->update($request->all());
+            foreach ($request->file('filename') as $key => $value)
+            {
+
+                $filename = time() . $key . '.' . $value->getClientOriginalExtension();
+
+                $value->move(public_path('photos'), $filename);
+                ProductsImage::create([
+                    'product_id' => $product->id,
+                    'filename' => $filename
+                ]);
+            }
+
+
             return redirect()->route('products.index')
                     ->with('success', 'Product updated successfully');
         }
