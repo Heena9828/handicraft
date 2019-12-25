@@ -16,11 +16,13 @@
         return view('welcome');
     });
 
-    Route::get('/public', function ()
-    {
-        return view('products');
-    });
+//    Route::get('/public', function ()
+//    {
+//        return view('products-images');
+//    });
 
+    Route::get('/public', 'ProductController@showImages');
+    
     Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
