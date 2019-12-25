@@ -134,16 +134,14 @@
             ]);
         }
 
-        public function showImages($id)
+        public function showImages()
         {
-//            $product = ProductsImage::all();
-//            $pro = Product::all();  
-            $products = Product::with('productimages')->get();
-
-//            $pro = Product::with('productimages')->where(['id',$id])->get();
-               
+            $product = ProductsImage::all();
+//            dd($product);
+//            $product = Product::with('productimages')->find($id);
             
-            return view('products-images', compact('products'));
+
+            return view('products-images', compact('product'));
         }
 
     }

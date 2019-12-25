@@ -82,7 +82,7 @@
 
 
                 @foreach($products as $product)
-                    <a href="{{ action('ProductController@create') }}" target="_blank"> 
+                    <a href="{{ route('products.edit',$product->id) } }}" target="_blank"> 
                         <img src="{{asset('photos/' . $product['productimages'][0]['filename'].'') }}" height="200px" width="200px" style="margin-left: 30px; margin-top: 20px;">
                     </a>
                 @endforeach
