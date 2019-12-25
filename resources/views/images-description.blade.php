@@ -28,38 +28,30 @@
                 @foreach($pro as $image)  
                 <div class="container" style="margin-top: 85px; margin-left: 85px;">
 
-                    <div class="form-group row" >
-                        {!! Form::label('image', 'Image:', ['class' => 'col-lg-2 control-label']) !!}
+                    <div class="form-group row" > 
 
-                        @foreach($image['productimages'] as $img)
-                        <div class="col-md-4" class="form-group">
-                           <img src="{{asset('photos/' . $img->filename.'') }}" height="200px" width="200px" style="margin-left: 30px; margin-top: 20px;">
-                           @endforeach
-                        </div>
+                        @foreach($image['productimages'] as $img) 
+                        <img src="{{asset('photos/' . $img->filename.'') }}" height="200px" width="200px" style="margin-left: 30px; margin-top: 20px;">
+                        @endforeach
+
 
                         <div class="form-group row" >
                             {!! Form::label('product_name', 'Product Name:', ['class' => 'col-lg-2 control-label']) !!}
 
-                            <div class="col-md-4" class="form-group">
-                                {{ $image['product_name'] }}
-                            </div>
+                            {{ $image['product_name'] }}
+
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                {!! Form::label('sku', 'Sku:', ['class' => 'col-lg-2 control-label']) !!}
-                            </div>
-                            <div class="col-md-4" class="form-group">
-                                {{ $image['sku'] }}
-                            </div>
+                        <div class="form-group"> 
+                            {!! Form::label('sku', 'Sku:', ['class' => 'col-lg-2 control-label']) !!}
+
+                            {{ $image['sku'] }} 
                         </div>
 
                         <div class="form-group row">
                             {!! Form::label('price', 'Price:', ['class' => 'col-lg-2 control-label']) !!}
 
-                            <div class="col-md-4" class="form-group">
-                                {{ $image['price'] }}
-                            </div>
+                            {{ $image['price'] }} 
                         </div>
                     </div>
 
