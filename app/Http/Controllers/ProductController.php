@@ -144,7 +144,7 @@
         public function details($id)
         {
             $pro = Product::with('productimages')->where('id', $id)->get();
-
+//            dd($pro);
             return view('images-description', compact('pro'));
         }
 
