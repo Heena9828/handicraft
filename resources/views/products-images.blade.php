@@ -79,14 +79,16 @@
                 <h3 style="">Products</h3>
                 <br>
 
-                <div class="row">
-                    <div class="col-3">
-                        @foreach($product as $image)
-                        <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px">
-                        @endforeach
 
-                    </div>
-                </div>
+
+                @foreach($products as $product)
+                    <a href="{{ action('ProductController@create') }}" target="_blank"> 
+                        <img src="{{asset('photos/' . $product['productimages'][0]['filename'].'') }}" height="200px" width="200px" style="margin-left: 30px; margin-top: 20px;">
+                    </a>
+                @endforeach
+                
+                
+                
 
             </div>
         </div>
