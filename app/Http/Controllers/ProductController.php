@@ -136,12 +136,16 @@
 
         public function showImages()
         {
-            $product = ProductsImage::all();
-//            dd($product);
-//            $product = Product::with('productimages')->find($id);
-            
+            $products = Product::with('productimages')->get();
 
-            return view('products-images', compact('product'));
+            return view('products-images', compact('products'));
+        }
+
+        public function details($id)
+        {
+            $pro = Product::with('productimages')->where('id', $id)->get();
+
+            return view('images-description', compact('pro'));
         }
 
     }
