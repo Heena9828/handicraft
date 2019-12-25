@@ -114,5 +114,15 @@
             return response()->json($subCategory);
         }
 
+        public function removeImg($id)
+        {
+
+            ProductsImage::find($id)->delete($id);
+
+            return response()->json([
+                    'success' => 'Record deleted successfully!'
+            ]);
+        }
+
     }
     

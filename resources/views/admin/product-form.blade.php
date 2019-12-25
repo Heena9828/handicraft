@@ -82,9 +82,10 @@
                 @if(isset($product) && !empty($product) && isset($product['productimages']) )
 
                 @foreach ($product['productimages'] as $image)  
-
+                
                 <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
                     <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" class="delete-image"></a>
+                <button type="button" onclick="deleted({{ $image->id }})" data-id="{{ $image->id }}" data-token="{{ csrf_token() }}">Delete Record</button>
                 @endforeach
                 @endif
 
@@ -107,8 +108,7 @@
         </div>
 
 
-
-        <script>
+        <script>            
             $(document).ready(function () {
                 $('#category_id').change(function () {
                     $("#business").show();
@@ -132,14 +132,33 @@
                         }
                     })
                 });
+            });
+            </script>
+            
+            <script>
+            
+            function deleted(id)
+            { 
+                // confirm
+                var result =confirm("Are u sure u want to delete");
+                if(result == true)
+                {
+                var token = $("meta[name='csrf-token']").attr("content");
+                $.ajax(
+                        {
+                            type: "GET",
+                            dataType: "json",
+                            url: "/productes/" + id,
+                            success: function (res) {
+                                console.log(res);
+                                console.log("it Works");
+                                return true;
+                            }
+                        });
+                    }
+                    location.reload();
+
 
             }
-            );
-        </script>
-
-        <script>
-
-//let productId = {{ isset($product) ?  $product['id'] : '' }};
-//            alert(productId);
-
-        </script>
+            
+        </script> 
