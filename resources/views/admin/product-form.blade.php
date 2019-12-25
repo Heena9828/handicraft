@@ -11,7 +11,7 @@
 
         <script>
             $(document).ready(function () {
-                $(".iframe").colorbox({iframe: true, fastIframe: false, width: "850px", height: "480px", transition: "fade", scrolling: false});
+            $(".iframe").colorbox({iframe: true, fastIframe: false, width: "850px", height: "480px", transition: "fade", scrolling: false});
             });
         </script>
 
@@ -82,9 +82,10 @@
                 @if(isset($product) && !empty($product) && isset($product['productimages']) )
 
                 @foreach ($product['productimages'] as $image)  
-                
+
                 <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
                     <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" class="delete-image"></a>
+                <!--<a href="" class="fa fa-trash delete-image" data-id="{{$image->id}}" aria-hidden="true"></a>-->
                 <button type="button" onclick="deleted({{ $image->id }})" data-id="{{ $image->id }}" data-token="{{ csrf_token() }}">Delete Record</button>
                 @endforeach
                 @endif
@@ -108,57 +109,55 @@
         </div>
 
 
-        <script>            
+        <script>
             $(document).ready(function () {
-                $('#category_id').change(function () {
-                    $("#business").show();
-                    var c_id = $(this).val();
-                    $.ajax({
-                        type: "get",
-                        url: "/get_subcategory/" + c_id,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (res)
-                        {
-                            if (res)
-                            {
-                                $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                                $.each(res, function (key, value) {
-                                    $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                                });
-                            }
-
-                        }
-                    })
-                });
-            });
-            </script>
-            
-            <script>
-            
-            function deleted(id)
-            { 
-                // confirm
-                var result =confirm("Are u sure u want to delete");
-                if(result == true)
-                {
-                var token = $("meta[name='csrf-token']").attr("content");
-                $.ajax(
-                        {
-                            type: "GET",
-                            dataType: "json",
-                            url: "/productes/" + id,
-                            success: function (res) {
-                                console.log(res);
-                                console.log("it Works");
-                                return true;
-                            }
-                        });
+            $('#category_id').change(function () {
+            $("#business").show();
+            var c_id = $(this).val();
+            $.ajax({
+            type: "get",
+                    url: "/get_subcategory/" + c_id,
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (res)
+                    {
+                    if (res)
+                    {
+                    $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                    $.each(res, function (key, value) {
+                    $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
+                    });
                     }
-                    location.reload();
 
+                    }
+            })
+            });
+            });
+        </script>
 
+        <script>
+
+            function deleted(id)
+            {
+            // confirm
+            var result = confirm("Are u sure u want to delete");
+            if (result == true)
+            {
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax(
+            {
+            type: "GET",
+                    dataType: "json",
+                    url: "/productes/" + id,
+                    success: function (res) {
+                    console.log(res);
+                    console.log("it Works");
+                    return true;
+                    }
+            });
             }
-            
+            location.reload();
+            }
+
         </script> 

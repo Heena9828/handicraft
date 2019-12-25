@@ -64,7 +64,6 @@
         {
             $arr_category = Category::all();
             $arr_subcategory = SubCategory::all();
-//            dd($product);
             return view('admin.product-edit', compact('product', 'arr_category', 'arr_subcategory'));
         }
 
@@ -81,6 +80,18 @@
             ]);
 
             $product->update($request->all());
+
+//            dd($product);
+//            foreach ($request->file('filename') as $photo)
+//            {
+//                $filename = $photo->store('');
+//                ProductsImage::update([
+//                    'product_id' => $product->id,
+//                    'filename' => $filename
+//                ]);
+//            }
+//            $product->update($request->all());
+
             foreach ($request->file('filename') as $key => $value)
             {
 
@@ -92,7 +103,6 @@
                     'filename' => $filename
                 ]);
             }
-
 
             return redirect()->route('products.index')
                     ->with('success', 'Product updated successfully');
