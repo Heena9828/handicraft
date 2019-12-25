@@ -80,7 +80,7 @@
             ]);
 
             $product->update($request->all());
-<<<<<<< HEAD
+
 //            dd($product);
 //            foreach ($request->file('filename') as $photo)
 //            {
@@ -91,7 +91,7 @@
 //                ]);
 //            }
 //            $product->update($request->all());
-=======
+
             foreach ($request->file('filename') as $key => $value)
             {
 
@@ -104,8 +104,6 @@
                 ]);
             }
 
-
->>>>>>> origin/master
             return redirect()->route('products.index')
                     ->with('success', 'Product updated successfully');
         }
