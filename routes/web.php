@@ -18,7 +18,7 @@
 
     Route::get('/public', function ()
     {
-        return view('index');
+        return view('products');
     });
 
     Auth::routes();
@@ -44,7 +44,7 @@
 
     Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
 
-    Route::delete('/delete/{id}', 'ProductController@delete');
+    Route::post('/delete/{id}', 'ProductController@delete');
     
  
 

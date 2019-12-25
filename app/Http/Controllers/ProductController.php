@@ -139,11 +139,9 @@
         function delete($id)
         {
             dd($id);
-//            $todo = ProductImages::findOrFail($id);
-//            $todo->delete();
-
-            ProductsImages::destroy($id);
-            return back();
+            $img = ProductsImages::findOrFail($id);
+            $img->delete();
+             return back();
 
 //            DB::table('products_images')->where('id', $id)->delete();
 //            return redirect()->route('products.index')

@@ -60,7 +60,6 @@
                 </div> 
                 <div class="form-group row" >
                     {!! Form::label('subcategory_id', 'Select Sub Category:', ['class' => 'col-lg-2 control-label']) !!}
-
                     <div class="col-md-4" class="form-group">
                         <select name="subcategory_id" class="form-control" id="subcategory_id" >
                             <option value="">--- Select Sub Category ---</option>
@@ -79,15 +78,19 @@
                     </div>
                 </div>
 
-                @if(isset($product) && !empty($product) && isset($product['productimages']) )
-
-                @foreach ($product['productimages'] as $image)  
-
-                <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
-                    <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" class="delete-image"></a>
-                <a href="" class="fa fa-trash delete-image" data-id="{{$image->id}}" aria-hidden="true"></a>
-                @endforeach
-                @endif
+                <div class="form-group row" >
+                    <div class="col-md-6" class="form-group">
+                        @if(isset($product) && !empty($product) && isset($product['productimages']) )
+                        @foreach ($product['productimages'] as $image) 
+                        <?php //  echo $image['id'];?>
+                        <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
+                            <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" ></a>
+                        <a href="" class="fa fa-trash" data-id="{{$image->id}}" aria-hidden="true" id="delete-image"></a>
+                        <!--<a class="btn btn-danger delete_user" href="javascript:void(0);" id="{{$image->id}}">Delete</a>-->
+                        @endforeach
+                        @endif
+                    </div>
+                </div>
 
                 <div class="form-group row" >
                     {!! Form::label('image', 'Product Image:', ['class' => 'col-lg-2 control-label']) !!}
@@ -103,13 +106,37 @@
                         <button type="submit" name="save"  id="button" class="btn btn-primary mr-2" style="margin-right: 360px;"> <i class="fa fa-save" aria-hidden="true"></i> Save</button>
                     </div>
                 </div>
-
             </div>
         </div>
 
 
 
         <script>
+
+            function deleteimage()
+            {
+//                 var id =document.getElementById('$image->id');
+                var id = $(this).attr('id');
+                alert(id);
+
+                var confirm_value = confirm("Are you sure you want to delete?");
+                if (confirm_value == true)
+                {
+                    $.ajax({
+                        url: '/delete/' + id,
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+
+                        success: function (response) {
+
+                        }
+                    });
+
+                }
+            }
+
             $(document).ready(function () {
                 $('#category_id').change(function () {
                     $("#business").show();
@@ -134,7 +161,28 @@
                     })
                 });
 
-                $(".delete-image").click(function (ev) {
+//                $('.delete_user').click(function () {
+//                    if (confirm('Are you sure?'))
+//                    {
+//                        var id = $(this).attr('id');
+//                        alert(id);
+//                        // Make an ajax call to delete the record and pass the id to identify the record
+//                        
+//                        $.ajax({
+//                            url: '/delete/' + id,
+//                            type: 'delete',
+//                            headers: {
+//                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//                            },
+//
+//                            success: function (response) {
+//
+//                            }
+//                        });
+//                    }
+//                });
+
+                $("#delete-image").click(function (ev) {
 
                     var confirm_value = confirm("Are you sure you want to delete?");
                     if (confirm_value == true)
