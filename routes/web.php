@@ -41,11 +41,9 @@
     /////Products
     Route::resource('products', 'ProductController');
     Route::post('product', 'ProductController@store');
+    Route::get('productes/{id}', 'ProductController@removeImg');
+
 
     Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
-
-    Route::post('/delete/{id}', 'ProductController@delete');
-    
  
-
     

@@ -11,7 +11,7 @@
 
         <script>
             $(document).ready(function () {
-                $(".iframe").colorbox({iframe: true, fastIframe: false, width: "850px", height: "480px", transition: "fade", scrolling: false});
+            $(".iframe").colorbox({iframe: true, fastIframe: false, width: "850px", height: "480px", transition: "fade", scrolling: false});
             });
         </script>
 
@@ -78,19 +78,15 @@
                     </div>
                 </div>
 
-                <div class="form-group row" >
-                    <div class="col-md-6" class="form-group">
-                        @if(isset($product) && !empty($product) && isset($product['productimages']) )
-                        @foreach ($product['productimages'] as $image) 
-                        <?php //  echo $image['id'];?>
-                        <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
-                            <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" ></a>
-                        <a href="" class="fa fa-trash" data-id="{{$image->id}}" aria-hidden="true" id="delete-image"></a>
-                        <!--<a class="btn btn-danger delete_user" href="javascript:void(0);" id="{{$image->id}}">Delete</a>-->
-                        @endforeach
-                        @endif
-                    </div>
-                </div>
+                @if(isset($product) && !empty($product) && isset($product['productimages']) )
+
+                @foreach ($product['productimages'] as $image)  
+
+                <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
+                    <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" class="delete-image"></a>
+                <a href="" class="fa fa-trash delete-image" data-id="{{$image->id}}" onclick="deleted({{ $image->id }})" aria-hidden="true"></a>
+                @endforeach
+                @endif
 
                 <div class="form-group row" >
                     {!! Form::label('image', 'Product Image:', ['class' => 'col-lg-2 control-label']) !!}
@@ -108,7 +104,6 @@
                 </div>
             </div>
         </div>
-
 
 
         <script>
@@ -138,77 +133,53 @@
             }
 
             $(document).ready(function () {
-                $('#category_id').change(function () {
-                    $("#business").show();
-                    var c_id = $(this).val();
-                    $.ajax({
-                        type: "get",
-                        url: "/get_subcategory/" + c_id,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (res)
-                        {
-                            if (res)
-                            {
-                                $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
-                                $.each(res, function (key, value) {
-                                    $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
-                                });
-                            }
-
-                        }
-                    })
-                });
-
-//                $('.delete_user').click(function () {
-//                    if (confirm('Are you sure?'))
-//                    {
-//                        var id = $(this).attr('id');
-//                        alert(id);
-//                        // Make an ajax call to delete the record and pass the id to identify the record
-//                        
-//                        $.ajax({
-//                            url: '/delete/' + id,
-//                            type: 'delete',
-//                            headers: {
-//                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//                            },
-//
-//                            success: function (response) {
-//
-//                            }
-//                        });
-//                    }
-//                });
-
-                $("#delete-image").click(function (ev) {
-
-                    var confirm_value = confirm("Are you sure you want to delete?");
-                    if (confirm_value == true)
+            $('#category_id').change(function () {
+            $("#business").show();
+            var c_id = $(this).val();
+            $.ajax({
+            type: "get",
+                    url: "/get_subcategory/" + c_id,
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (res)
                     {
-                        var id = $(this).attr('data-id');
-                        alert(id);
-                        $.ajax({
-                            url: '/delete/' + id,
-                            type: 'delete',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-
-                            success: function (response) {
-
-                            }
-                        });
+                    if (res)
+                    {
+                    $("#subcategory_id").text("").append('<option>---Select Sub Category---</option>');
+                    $.each(res, function (key, value) {
+                    $("#subcategory_id").append('<option value="' + key + '">' + value + '</option>');
+                    });
+                    }
 
                     }
-                })
+            })
+            });
             });
         </script>
 
         <script>
 
-//let productId = {{ isset($product) ?  $product['id'] : '' }};
-//            alert(productId);
+            function deleted(id)
+            {
+            // confirm
+            var result = confirm("Are u sure u want to delete");
+            if (result == true)
+            {
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax(
+            {
+            type: "GET",
+                    dataType: "json",
+                    url: "/productes/" + id,
+                    success: function (res) {
+                    console.log(res);
+                    console.log("it Works");
+                    return true;
+                    }
+            });
+            }
+            location.reload();
+            }
 
-        </script>
+        </script> 

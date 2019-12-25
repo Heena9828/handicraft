@@ -124,28 +124,14 @@
             return response()->json($subCategory);
         }
 
-//        public function deleteImage(Request $request)
-//        {
-//            $attachments = Image::find(request('filename'))->delete();
-//            dd($attachments);
-//            $path = public_path() . '/photos/' . $id . '/' . request('filename');
-//            unlink($path);
-//
-//            return response()->json($attachments);
-//
-////           
-//        }
-
-        function delete($id)
+        public function removeImg($id)
         {
-            dd($id);
-            $img = ProductsImages::findOrFail($id);
-            $img->delete();
-             return back();
 
-//            DB::table('products_images')->where('id', $id)->delete();
-//            return redirect()->route('products.index')
-//                    ->with('success', 'Product Image deleted successfully');
+            ProductsImage::find($id)->delete($id);
+
+            return response()->json([
+                    'success' => 'Record deleted successfully!'
+            ]);
         }
 
     }
