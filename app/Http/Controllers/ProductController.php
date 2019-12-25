@@ -137,11 +137,15 @@
         public function showImages()
         {
             $product = ProductsImage::all();
-//            dd($product);
-//            $product = Product::with('productimages')->find($id);
-            
+            return view('products-images', compact('products','product'));
+        }
+        
+        public function details()
+        {
+            dd('jdfkfh');
+              $product = Product::all();        
 
-            return view('products-images', compact('product'));
+            return view('products-images', compact('products','product'));
         }
 
     }

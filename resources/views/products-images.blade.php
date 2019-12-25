@@ -80,14 +80,13 @@
                 <br>
 
                 <div class="row">
-                    <div class="col-3">
-                        @foreach($product as $image)
-                        <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px">
-                        @endforeach
-
-                    </div>
+                    @foreach($product as $image)
+                    <img src="{{asset('photos/' . $image->filename.'') }}" height="100px" width="100px" style="margin-right: 30px;">
+                    <a href="{{ action('ProductController@details') }}">Description</a>
+                    @endforeach
                 </div>
-
+                
+                
             </div>
         </div>
 
