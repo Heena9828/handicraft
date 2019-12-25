@@ -134,5 +134,15 @@
             ]);
         }
 
+        public function showImages()
+        {
+            $product = ProductsImage::all();
+//            dd($product);
+//            $product = Product::with('productimages')->find($id);
+            
+
+            return view('products-images', compact('product'));
+        }
+
     }
     

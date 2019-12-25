@@ -78,25 +78,18 @@
             <div class="container" style="margin-top: 85px; margin-left: 85px;">
                 <h3 style="">Products</h3>
                 <br>
-                
+
                 <div class="row">
                     <div class="col-3">
-                        <img src="images/g1.jpg" alt=" " class="img-fluid" />
+                        @foreach($product as $image)
+                        <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px">
+                        @endforeach
+
                     </div>
-                    <div class="col-3">
-                        <img src="images/g1.jpg" alt=" " class="img-fluid" />
-                    </div>
-                    <div class="col-3">
-                        <img src="images/g1.jpg" alt=" " class="img-fluid" />
-                    </div>
-                    
-                    <div class="col-3">
-                        <img src="images/g1.jpg" alt=" " class="img-fluid" />
-                    </div>
-                   
                 </div>
+
             </div>
         </div>
-        <!--</div>-->
+
     </body>
 </html>
