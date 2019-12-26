@@ -84,7 +84,7 @@
 
                 <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
                     <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" class="delete-image"></a>
-                <a href="" class="fa fa-trash delete-image" data-id="{{$image->id}}" onclick="deleted({{ $image->id }})" aria-hidden="true"></a>
+                <a href="" class="fa fa-trash delete-image" data-id="{{$image->id}}" onclick="deleted({{ $image - > id }})" aria-hidden="true"></a>
                 @endforeach
                 @endif
 
@@ -107,30 +107,6 @@
 
 
         <script>
-
-            function deleteimage()
-            {
-//                 var id =document.getElementById('$image->id');
-                var id = $(this).attr('id');
-                alert(id);
-
-                var confirm_value = confirm("Are you sure you want to delete?");
-                if (confirm_value == true)
-                {
-                    $.ajax({
-                        url: '/delete/' + id,
-                        type: 'post',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-
-                        success: function (response) {
-
-                        }
-                    });
-
-                }
-            }
 
             $(document).ready(function () {
             $('#category_id').change(function () {
