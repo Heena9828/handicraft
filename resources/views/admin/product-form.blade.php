@@ -84,7 +84,7 @@
 
                 <a class='iframe' href="{{asset('photos/' . $image->filename.'') }}">
                     <img src="{{asset('photos/' . $image->filename.'') }}" height="40px" width="90px" class="delete-image"></a>
-                <a href="" class="fa fa-trash delete-image" data-id="{{$image->id}}" onclick="deleted({{ $image - > id }})" aria-hidden="true"></a>
+                <a href="" class="fa fa-trash delete-image" data-id="{{$image->id}}" onclick="deleted({{ $image->id }})" aria-hidden="true"></a>
                 @endforeach
                 @endif
 
