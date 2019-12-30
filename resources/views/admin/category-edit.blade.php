@@ -28,7 +28,7 @@
     </div>
 </div>
 @endif
-{!! Form::model($category, ['method' => 'PATCH','route' => ['categories.update', $category->id]]) !!}
+{!! Form::model($category, ['method' => 'PATCH','route' => ['categories.update', $category->id],'id'=>'addCategory']) !!}
 @include('admin.category-form')
 {!! Form::close() !!}
 @endsection
