@@ -7,9 +7,11 @@
     use Validator;
     use Laravel\Passport\HasApiTokens;
     use Illuminate\Support\Facades\Redirect;
+    use App\Rules\Checkvalidation;
 
     class CategoryController extends Controller
     {
+
         public function index()
         {
             $categories = Category::latest()->paginate(5);
@@ -24,6 +26,10 @@
 
         public function store(Request $request)
         {
+//            $this->validate(request(), [
+//                'category_name' => [new Checkvalidation]
+//            ]);
+
             $rules = [
                 'category_name' => 'required|unique:categories'
             ];
@@ -33,7 +39,11 @@
                 return Redirect::back()->withErrors($validator);
             }
 
-            Category::create($request->all());
+            $data = [
+                Category::CATEGORY_NAME => $request->get('category_name')
+            ];
+
+            Category::create($data);
             return redirect()->route('categories.index')
                     ->with('success', 'Category created successfully');
         }
@@ -48,7 +58,12 @@
             request()->validate([
                 'category_name' => 'required',
             ]);
-            $category->update($request->all());
+
+            $data = [
+                Category::CATEGORY_NAME => $request->get('category_name')
+            ];
+
+            $category->update($data);
             return redirect()->route('categories.index')
                     ->with('success', 'Category updated successfully');
         }
@@ -61,18 +76,17 @@
                     ->with('success', 'Category deleted successfully');
         }
 
-        public function userExists()
-        {
-            $user = Category::all()->lists('category_name');
-            if (in_array(Input::get('category_name'), $user))
-            {
-                return Response::json(Input::get('category_name') . ' is already taken');
-            }
-            else
-            {
-                return Response::json(Input::get('category_name') . ' Username is available');
-            }
-        }
-
+//        public function userExists()
+//        {
+//            $user = Category::all()->lists('category_name');
+//            if (in_array(Input::get('category_name'), $user))
+//            {
+//                return Response::json(Input::get('category_name') . ' is already taken');
+//            }
+//            else
+//            {
+//                return Response::json(Input::get('category_name') . ' Username is available');
+//            }
+//        }
     }
     

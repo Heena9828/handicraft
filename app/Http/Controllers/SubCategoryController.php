@@ -26,8 +26,15 @@
         {
             request()->validate([
                 'sub_category_name' => 'required|unique:subcategories',
+                'category_id' => 'required',
             ]);
-            SubCategory::create($request->all());
+
+            $data = [
+                SubCategory::Sub_Category_Name => $request->get('sub_category_name'),
+                SubCategory::Category_Id => $request->get('category_id')
+            ];
+
+            SubCategory::create($data);
             return redirect()->route('subcategories.index')
                     ->with('success', 'Sub Category created successfully');
         }
@@ -42,8 +49,15 @@
         {
             request()->validate([
                 'sub_category_name' => 'required',
+                'category_id' => 'required',
             ]);
-            $subcategory->update($request->all());
+
+            $data = [
+                SubCategory::Sub_Category_Name => $request->get('sub_category_name'),
+                SubCategory::Category_Id => $request->get('category_id')
+            ];
+
+            $subcategory->update($data);
             return redirect()->route('subcategories.index')
                     ->with('success', 'Sub Category updated successfully');
         }

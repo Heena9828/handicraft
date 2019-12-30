@@ -10,7 +10,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ site_title() }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -84,7 +84,6 @@
                         <img src="{{asset('photos/' . $product['productimages'][0]['filename'].'') }}" height="200px" width="200px" style="margin-left: 30px; margin-top: 20px;">
                     </a>
                 @endforeach
-                
                 
 
             </div>
