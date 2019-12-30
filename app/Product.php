@@ -11,6 +11,8 @@
             'product_name', 'sku', 'price', 'description', 'category_id', 'subcategory_id'
         ];
 
+      
+        
         public function resolveRouteBinding($value)
         {
             return $this->with('productimages')->where('id', $value)->first();
