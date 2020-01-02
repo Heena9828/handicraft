@@ -34,3 +34,17 @@
         </div>
     </body>
 </html>
+<script>
+    function global(type1, url1, data1, callback)
+    {
+        axios({
+            type: type1,
+            url: url1,
+            data: data1, 
+        })
+
+                .then(function (response) {
+                    callback(response);
+                }); 
+    }
+</script>

@@ -43,7 +43,7 @@
                 Category::CATEGORY_NAME => $request->get('category_name')
             ];
 
-            Category::create($data);
+            Category::create($data); 
             return redirect()->route('categories.index')
                     ->with('success', 'Category created successfully');
         }
