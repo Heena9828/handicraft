@@ -38,10 +38,14 @@
     <script>
         function fatchdata(method, url1, data1, callback)
         {
+            alert(method+''+url1+' '+data1);
             axios({
+                 headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                 type: method,
                 url: url1,
-                data: data1
+                data:{data1}
             })
             .then(function (response) {
 //                alert('axios callback');

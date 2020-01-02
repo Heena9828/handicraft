@@ -16,7 +16,7 @@
 
         <div class="form-group row">
             <div class="col-md-9 offset-sm-3">
-                <button type="button" name="save"  id="butsave" class="btn btn-primary mr-2" style="margin-right: 360px;" onclick="validate()"> <i class="fa fa-save" aria-hidden="true"></i> Save</button>
+                <button type="button" name="save"  class="btn btn-primary mr-2" style="margin-right: 360px;" onclick="validate()"> <i class="fa fa-save" aria-hidden="true"></i> Save</button>
             </div>
         </div>
 
@@ -27,22 +27,29 @@
 
     function validate()
     {
+        var category_name = document.getElementById('category_name').value;
+//        alert(category_name);
+
         if ($('#category_name').val() == '') {
             $('#catErr').text('Category Name Required');
             return false;
         }
 
-        var category_name = $('category_name').val();
-        var method = 'get';
-        var url1 = '/categories';
+
+        var method = 'post';
+        var url1 = '/storedata';
         var data1 = {
-            category_name: category_name
+            "category_name": category_name
         };
 
-        fatchdata(method, url1, data1, (data) => {
-//            alert('dsssfds');
+        fatchdata(method, url1, data1, function(data){
+            sucess(data);
         }
         );
+
+    }
+    function sucess(data){
+        alert('hi');
     }
 </script>
 

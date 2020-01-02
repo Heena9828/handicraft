@@ -26,6 +26,7 @@
 
         public function store(Request $request)
         {
+               dd($request->data1);
             
 //            dd($request);
 //            $this->validate(request(), [
@@ -44,10 +45,10 @@
             $data = [
                 Category::CATEGORY_NAME => $request->get('category_name')
             ];
+         
             Category::create($data);
 
-            return;
-//            return  response()->json();
+            return  response()->json();
 //            return json_encode(['msg' => 'Category created successfully']);
             
 //            return redirect()->route('categories.index')

@@ -35,7 +35,7 @@
 
     ///Category
     Route::resource('categories', 'CategoryController');
-    Route::get('create_categories', 'CategoryController@store')->name('save_category');
+    Route::post('/storedata', 'CategoryController@store');
 
     ///Subcategories
     Route::resource('subcategories', 'SubCategoryController');
