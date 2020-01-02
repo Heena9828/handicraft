@@ -25,14 +25,7 @@
         }
 
         public function store(Request $request)
-        {
-               dd($request->data1);
-            
-//            dd($request);
-//            $this->validate(request(), [
-//                'category_name' => [new Checkvalidation]
-//            ]);
-
+        { 
             $rules = [
                 'category_name' => 'required|unique:categories'
             ];
@@ -45,14 +38,10 @@
             $data = [
                 Category::CATEGORY_NAME => $request->get('category_name')
             ];
-         
-            Category::create($data);
 
-            return  response()->json();
-//            return json_encode(['msg' => 'Category created successfully']);
-            
-//            return redirect()->route('categories.index')
-//                    ->with('success', 'Category created successfully');
+             Category::create($data);
+
+            return response()->json(); 
         }
 
         public function edit(Category $category)

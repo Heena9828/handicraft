@@ -22,7 +22,7 @@
 //    });
 
     Route::get('/public', 'ProductController@showImages');
-    
+
     Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
@@ -35,7 +35,7 @@
 
     ///Category
     Route::resource('categories', 'CategoryController');
-    Route::post('/storedata', 'CategoryController@store');
+    Route::post('category', 'CategoryController@store'); 
 
     ///Subcategories
     Route::resource('subcategories', 'SubCategoryController');
@@ -45,10 +45,11 @@
     Route::resource('products', 'ProductController');
     Route::post('product', 'ProductController@store');
     Route::get('productes/{id}', 'ProductController@removeImg');
-    
+
     Route::get('showdetails/{id}', 'ProductController@details')->name('product-details');
 
 
     Route::get('get_subcategory/{c_id}', 'ProductController@getSubcategory');
- 
+
+
     

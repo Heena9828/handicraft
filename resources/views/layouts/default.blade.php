@@ -35,23 +35,26 @@
 
         </div>
     </body>
-    <script>
-        function fatchdata(method, url1, data1, callback)
-        {
-            alert(method+''+url1+' '+data1);
-            axios({
-                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                type: method,
-                url: url1,
-                data:{data1}
-            })
-            .then(function (response) {
-//                alert('axios callback');
-                callback(response);
-            });
-        }
 
-    </script>
 </html>
+<script>
+function fatchdata(method, url1, data1, callback)
+{
+    axios({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: method,
+        url: url1,
+        data: data1
+    })
+            .then(function (response) {
+                callback(response);
+            })
+            .catch(error => {
+                callback(error.response)
+            });
+
+}
+
+</script>

@@ -26,30 +26,28 @@
 <script>
 
     function validate()
-    {
-        var category_name = document.getElementById('category_name').value;
-//        alert(category_name);
-
+    { 
         if ($('#category_name').val() == '') {
             $('#catErr').text('Category Name Required');
             return false;
         }
 
-
+        var category_name = document.getElementById('category_name').value;
         var method = 'post';
-        var url1 = '/storedata';
+        var url1 = '/category';
         var data1 = {
-            "category_name": category_name
+            category_name: category_name
         };
 
-        fatchdata(method, url1, data1, function(data){
+        fatchdata(method, url1, data1, function (data) {
             sucess(data);
-        }
-        );
+        });
 
     }
-    function sucess(data){
-        alert('hi');
+
+
+    function sucess(data) {
+        window.location.href = "{{URL::to('categories')}}";
     }
 </script>
 
