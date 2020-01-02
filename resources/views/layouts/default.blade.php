@@ -2,6 +2,9 @@
 <html>
     <head>
         @include('includes.head')
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <style>
         footer {
@@ -30,7 +33,21 @@
             </div>
 
 
-
         </div>
     </body>
+    <script>
+        function fatchdata(method, url1, data1, callback)
+        {
+            axios({
+                type: method,
+                url: url1,
+                data: data1
+            })
+            .then(function (response) {
+//                alert('axios callback');
+                callback(response);
+            });
+        }
+
+    </script>
 </html>

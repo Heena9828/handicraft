@@ -1,4 +1,4 @@
-@extends('layouts.default')
+
 @section('content')
 
 <div class="" style="text-align: center">
