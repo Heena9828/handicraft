@@ -79,18 +79,7 @@
                 'filename' => 'required',
             ]);
 
-            $product->update($request->all());
-
-//            dd($product);
-//            foreach ($request->file('filename') as $photo)
-//            {
-//                $filename = $photo->store('');
-//                ProductsImage::update([
-//                    'product_id' => $product->id,
-//                    'filename' => $filename
-//                ]);
-//            }
-//            $product->update($request->all());
+            $product->update($request->all()); 
 
             foreach ($request->file('filename') as $key => $value)
             {
