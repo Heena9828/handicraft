@@ -21,11 +21,13 @@
 
         public function create()
         {
-            return view('admin.category-add');
+            return view('admin.category-form');
         }
 
         public function store(Request $request)
         {
+            
+//            dd($request);
 //            $this->validate(request(), [
 //                'category_name' => [new Checkvalidation]
 //            ]);
@@ -42,10 +44,14 @@
             $data = [
                 Category::CATEGORY_NAME => $request->get('category_name')
             ];
+            Category::create($data);
 
-            Category::create($data); 
-            return redirect()->route('categories.index')
-                    ->with('success', 'Category created successfully');
+            return;
+//            return  response()->json();
+//            return json_encode(['msg' => 'Category created successfully']);
+            
+//            return redirect()->route('categories.index')
+//                    ->with('success', 'Category created successfully');
         }
 
         public function edit(Category $category)

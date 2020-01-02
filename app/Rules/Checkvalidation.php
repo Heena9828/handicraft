@@ -26,7 +26,8 @@
          */
         public function passes($attribute, $value)
         {
-
+//            dd($value);
+           
             return $value > 5;
         }
 
